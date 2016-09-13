@@ -1,0 +1,18 @@
+<p>
+  <strong>Product name:</strong>
+  <%= @product.product_name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Amount in stock:</strong>
+  <%= @product.amount_in_stock %>
+</p>
+
+<%= link_to 'Edit this product', edit_product_path(@product), :class => "btn btn-primary" %>
+<%= link_to 'Back to all products', products_path, :class => "btn btn-primary"%>
+

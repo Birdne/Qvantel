@@ -1,0 +1,38 @@
+<%= form_for @product do |f| %>
+ 
+  <% # TASK-1 edit and new %>
+  <% # checks if there are any errors regarding the creation or edition of a  product. If there are any errors information about them is displayed on the screen. %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@product.errors.count, "error") %> prohibited
+        this product from being saved:
+      </h2>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :product_name %><br>
+    <%= f.text_field :product_name %>
+  </p>
+ 
+  <p>
+    <%= f.label :price %><br>
+    <%= f.number_field :price, step: "0.01" %>
+  </p>
+ 
+  <p>
+    <%= f.label :amount_in_stock %><br>
+    <%= f.number_field :amount_in_stock %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

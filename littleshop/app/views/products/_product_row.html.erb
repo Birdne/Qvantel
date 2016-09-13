@@ -1,0 +1,35 @@
+<div class="well">
+
+  <div class="row">
+    <div class="col-xs-8">
+      <h4><%= product.product_name %></small></h4>
+      <h4><span style="color: grey"><%= product.amount_in_stock %> in stock</small></h4>
+      <%= link_to 'Show', product_path(product) %>
+      <%= link_to 'Edit', edit_product_path(product) %>
+	  <% # TASK-1 destroy %>
+      <%= link_to 'Destroy', product_path(product), 
+		method: :delete,
+		data: { confirm: 'Are you sure?' } %>
+    </div>
+    <div class="col-xs-4">
+      
+      <%= form_for order_item, remote: true do |f| %>
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency product.price %></span></h4>
+        <div class="input-group">
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, in: 0..product.amount_in_stock.to_i %>
+          <div class="input-group-btn">
+            <%= f.hidden_field :product_id, value: product.id %>
+            <% if product.amount_in_stock.to_i == 0 %>
+              <%= f.submit "Add to Cart", class: "btn btn-primary", disabled: true %>
+            <% else %>
+			  <% # TASK-2 create %>
+              <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+         
+      <% end %>
+    </div>
+    
+  </div>
+</div>

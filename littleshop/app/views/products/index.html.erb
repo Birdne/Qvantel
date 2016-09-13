@@ -1,0 +1,29 @@
+<h1>List of all products in stock</h1>
+
+<% # TASK-3 4 and 5 %>
+<div id="searchBar" class="well">
+  <%= form_tag({action: 'index'}, method: "get") do %>
+    <%= label_tag(:q, "Sort by:") %>
+      <%= radio_button_tag(:sorting_key, "product_name") %>
+      <%= label_tag(:sort_by_name, "Name") %>
+      <%= radio_button_tag(:sorting_key, "price") %>
+      <%= label_tag(:sort_by_price, "Price") %><br>
+
+    <%= label_tag(:q, "Price from:") %>
+      <%= number_field_tag(:start_on, "0.00", step: 5.0) %>
+      <%= number_field_tag(:end_on, "5000.00", step: 5.0) %><br>
+
+    <%= label_tag(:text, "Search for:") %>
+      <%= text_field_tag(:search) %>
+      
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>
+
+<%= link_to 'Add new product', new_product_path %> 
+ 
+  <% @products.each do |product| %>
+    <%= render "product_row", product: product, order_item: @order_item %>
+
+  <% end %>
+
